@@ -57,7 +57,7 @@
     const left = (screen.width - w) / 2;
     const top = (screen.height - h) / 2;
     // popup.html은 같은 경로에 있다고 가정
-    popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
+    popupRef = window.open('popup1.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
 
     if (!popupRef) {
       document.getElementById('status').textContent = '팝업1이 차단되었습니다. 브라우저 설정을 확인하세요.';
