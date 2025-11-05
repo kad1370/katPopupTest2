@@ -23,9 +23,7 @@
 
   document.getElementById('btnClose').addEventListener('click', function(){
     //tryOpen();
-    if(window.opener) {
-      window.opener.postMessage({type:'POPUP_CLOSED', popupName: document.title}, '*');
-    }
+    window.opener.postMessage({type:'POPUP_CLOSED', popupName: document.title}, '*');
     self.close();
   });
 

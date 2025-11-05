@@ -73,7 +73,9 @@
 
     window.addEventListener('message', function(e){
       try {
+        document.getElementById('status2').textContent = 'type:: ' + e.data.type;
         if(e.data.type === 'POPUP_CLOSED') {
+          document.getElementById('status2').textContent = 'close listener 탐';
           popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
         }
         /*
