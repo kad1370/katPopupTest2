@@ -29,8 +29,8 @@
     const left = (screen.width - w) / 2;
     const top = (screen.height - h) / 2;
     // popup.html은 같은 경로에 있다고 가정
-    popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
     popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
+
     if (!popupRef) {
       document.getElementById('status').textContent = '팝업이 차단되었습니다. 브라우저 설정을 확인하세요.';
     } else {
@@ -42,7 +42,9 @@
     if (!popupRef2) {
       document.getElementById('status2').textContent = '팝업2이 차단되었습니다. 브라우저 설정을 확인하세요.';
     } else {
+      popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
       document.getElementById('status2').textContent = '팝업2이 열렸습니다.';
+
       // optional: 포커스
       try { popupRef.focus(); } catch(e){}
     }
