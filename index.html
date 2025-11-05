@@ -14,7 +14,8 @@
   <h2>팝업 테스트 (Main)</h2>
   <p>버튼 누르면 팝업이 열리고, 팝업에서 닫기 버튼을 누르면 닫힙니다.</p>
 
-  <button id="openPopup">팝업 열기</button>
+  <button id="openPopup">팝업 열기(case1)</button>
+  <button id="openPopup2">팝업 열기(case2)</button>
   <p id="status"></p>
   <p id="status2"></p>
 
@@ -31,6 +32,16 @@
     // popup.html은 같은 경로에 있다고 가정
     popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
 
+    if (!popupRef2) {
+      document.getElementById('status2').textContent = '팝업2이 차단되었습니다. 브라우저 설정을 확인하세요.';
+    } else {
+      popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
+      document.getElementById('status2').textContent = '팝업2이 열렸습니다.';
+
+      // optional: 포커스
+      try { popupRef.focus(); } catch(e){}
+    }
+
     if (!popupRef) {
       document.getElementById('status').textContent = '팝업이 차단되었습니다. 브라우저 설정을 확인하세요.';
     } else {
@@ -38,13 +49,20 @@
       // optional: 포커스
       try { popupRef.focus(); } catch(e){}
     }
+  });
 
-    if (!popupRef2) {
-      document.getElementById('status2').textContent = '팝업2이 차단되었습니다. 브라우저 설정을 확인하세요.';
+  document.getElementById('openPopup2').addEventListener('click', function(){
+    // 팝업 옵션은 필요에 맞게 조절
+    const w = 420, h = 700;
+    const left = (screen.width - w) / 2;
+    const top = (screen.height - h) / 2;
+    // popup.html은 같은 경로에 있다고 가정
+    popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
+
+    if (!popupRef) {
+      document.getElementById('status').textContent = '팝업1이 차단되었습니다. 브라우저 설정을 확인하세요.';
     } else {
-      popupRef = window.open('popup.html', '_blank', `width=${w},height=${h},left=${left},top=${top}`);
-      document.getElementById('status2').textContent = '팝업2이 열렸습니다.';
-
+      document.getElementById('status').textContent = '팝업1이 열렸습니다.';
       // optional: 포커스
       try { popupRef.focus(); } catch(e){}
     }
@@ -56,7 +74,7 @@
     window.addEventListener('message', function(e){
       try {
         if(e.data.type === 'POPUP_CLOSED') {
-          alert(`${e.data.popupName} 창 닫힘`);
+          popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
         }
         /*
         const data = e.data;
