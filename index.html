@@ -14,8 +14,9 @@
   <h2>팝업 테스트 (Main)</h2>
   <p>버튼 누르면 팝업이 열리고, 팝업에서 닫기 버튼을 누르면 닫힙니다.</p>
 
-  <button id="openPopup">팝업 열기(case1)</button>
-  <button id="openPopup2">팝업 열기(case2)</button>
+  <button id="openPopup">팝업 열기</button>
+  <!--<button id="openPopup2">팝업 열기!</button>-->
+  <button id="test">test</button>
   <p id="status"></p>
   <p id="status2"></p>
 
@@ -51,6 +52,8 @@
     }
   });
 
+
+/*
   document.getElementById('openPopup2').addEventListener('click', function(){
     // 팝업 옵션은 필요에 맞게 조절
     const w = 420, h = 700;
@@ -76,9 +79,9 @@
         document.getElementById('status2').textContent = 'type:: ' + e.data.type;
         if(e.data.type === 'POPUP_CLOSED') {
           document.getElementById('status2').textContent = 'close listener 탐';
-          popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
+          $('#test').trigger('click');
         }
-        /*
+
         const data = e.data;
         if (data && data.action === 'closePopup') {
           if (popupRef && !popupRef.closed) {
@@ -88,11 +91,29 @@
             document.getElementById('status').textContent = '팝업이 이미 닫혔거나 참조가 없습니다.';
           }
         }
-        */
+
       } catch(err) {
         console.error(err);
       }
     }, false);
+
+    document.getElementById('test').addEventListener('click', function(){
+      // 팝업 옵션은 필요에 맞게 조절
+      const w = 420, h = 700;
+      const left = (screen.width - w) / 2;
+      const top = (screen.height - h) / 2;
+      // popup.html은 같은 경로에 있다고 가정
+      popupRef2 = window.open('popup2.html', '_blank2', `width=${w},height=${h},left=${left},top=${top}`);
+
+      if (!popupRef2) {
+        document.getElementById('status').textContent = '팝업2이 차단되었습니다. 브라우저 설정을 확인하세요.';
+      } else {
+        document.getElementById('status').textContent = '팝업2이 열렸습니다.';
+        // optional: 포커스
+        try { popupRef.focus(); } catch(e){}
+      }
+    });
+    */
 })();
 </script>
 </body>
